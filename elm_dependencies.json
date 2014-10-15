@@ -1,8 +1,8 @@
 {
     "summary": "Math Library in Elm",
-    "repository": "",
+    "repository": "https://github.com/TheSeamau5/HMath.git",
     "dependencies": {},
-    "exposed-modules": [],
+    "exposed-modules": ["Vector2"],
     "version": "0.1.0",
     "elm-version": "0.13",
     "license": "BSD3",

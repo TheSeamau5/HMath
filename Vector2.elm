@@ -8,7 +8,7 @@ module Vector2 where
 @docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance
 
 # Useful aliases and operators
-@docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot
+@docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot, taxicabNorm, taxicabDistance
 -}
 
 {-| The Vector type for 2-d vector operations. Useful for 2d graphics and vector math -}
@@ -142,6 +142,10 @@ norm n v = ((v.x ^ n) + (v.y ^ n)) ^ (1 / n)
 manhattanNorm : Vector -> number
 manhattanNorm v = (abs v.x) + (abs v.y)
 
+{-| Find the taxicab (or manhattan) norm of a vector. -}
+taxicabNorm : Vector -> number
+taxicabNorm = manhattanNorm
+
 {-| Find the euclidean length of a vector. 
     This is the most typical measure for the length of a vector. 
     Use this if unsure. 
@@ -165,7 +169,10 @@ scaleBy n v = Vector (v.x * n) (v.y * n)
 distance : Vector -> Vector -> number
 distance p q = length (p <-> q)
 
-{-| Finds the manhattan (or taxicab) distance between two vectors.
--}
+{-| Finds the manhattan (or taxicab) distance between two vectors. -}
 manhattanDistance : Vector -> Vector -> number
 manhattanDistance p q = manhattanNorm (p <-> q)
+
+{-| Finds the taxicab (or manhattan) distance between two vectors. -}
+taxicabDistance : Vector -> Vector -> number
+taxicabDistance = manhattanDistance

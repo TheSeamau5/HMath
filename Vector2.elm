@@ -5,10 +5,10 @@ module Vector2 where
 @docs Vector, origin, xUnit, yUnit
 
 # Mathematical Operations
-@docs add, subtract, multiply, divide, dotMultiply, scaleBy, normalize
+@docs negate, add, subtract, multiply, divide, dotMultiply, scaleBy, normalize
 
 # Norms and Distances
-@docs length, distance, norm, manhattanNorm, manhattanDistance, maximumNorm, chebyshevDistance, canberraDistance
+@docs length, lengthSquared, distance, norm, manhattanNorm, manhattanDistance, maximumNorm, chebyshevDistance, canberraDistance
 
 # Useful aliases and operators
 @docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot, taxicabNorm, taxicabDistance, euclideanNorm, euclideanDistance
@@ -29,6 +29,12 @@ xUnit = Vector 1 0
 yUnit : Vector
 yUnit = Vector 0 1
 
+{-| Negates a vector.
+        
+        negate (Vector 3 4) == Vector -3 -4
+-}
+negate : Vector -> Vector
+negate = scaleBy (-1)
 
 {-| Vector addition.
 
@@ -157,6 +163,11 @@ taxicabNorm = manhattanNorm
 -}
 length : Vector -> number
 length = norm 2
+
+{-| Find the length squared of a vector. 
+    This is usually a convenience function but nevertheless very useful. -}
+lengthSquared : Vector -> number
+lengthSquared v = (v.x * v.x) + (v.y * v.y)
 
 
 {-| Find the euclidean norm of a vector. -}

@@ -1,7 +1,7 @@
 [
 {
   "name": "Vector2",
-  "document": "Represents a two dimensional vector.\n\n# Types and Constructors\n@docs Vector, origin, xUnit, yUnit\n\n# Mathematical Operations\n@docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance, maximumNorm, normalize, chebyshevDistance\n\n# Useful aliases and operators\n@docs (\u003c+\u003e), (\u003c-\u003e), (\u003c*\u003e), (\u003c/\u003e), (\u003c.\u003e), sub, mul, div, dot, taxicabNorm, taxicabDistance",
+  "document": "Represents a two dimensional vector.\n\n# Types and Constructors\n@docs Vector, origin, xUnit, yUnit\n\n# Mathematical Operations\n@docs add, subtract, multiply, divide, dotMultiply, scaleBy, normalize\n\n# Norms and Distances\n@docs length, distance, norm, manhattanNorm, manhattanDistance, maximumNorm, chebyshevDistance, canberraDistance\n\n# Useful aliases and operators\n@docs (\u003c+\u003e), (\u003c-\u003e), (\u003c*\u003e), (\u003c/\u003e), (\u003c.\u003e), sub, mul, div, dot, taxicabNorm, taxicabDistance, euclideanNorm, euclideanDistance",
   "aliases": [
     {
       "name": "Vector",
@@ -195,6 +195,30 @@
       }
     },
     {
+      "name": "canberraDistance",
+      "comment": "Finds the Canberra distance between two vectors.",
+      "raw": "canberraDistance : Vector -\u003e Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
       "name": "chebyshevDistance",
       "comment": "Finds the Chebyshev distance between two vectors.",
       "raw": "chebyshevDistance : Vector -\u003e Vector -\u003e number",
@@ -339,6 +363,49 @@
           "tag": "adt",
           "name": "Float",
           "args": []
+        }
+      }
+    },
+    {
+      "name": "euclideanDistance",
+      "comment": "Finds the euclidean distance between two vectors.",
+      "raw": "euclideanDistance : Vector -\u003e Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
+      "name": "euclideanNorm",
+      "comment": "Find the euclidean norm of a vector.",
+      "raw": "euclideanNorm : Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
         }
       }
     },

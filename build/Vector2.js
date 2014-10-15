@@ -33,6 +33,9 @@ Elm.Vector2.make = function (_elm) {
       $Basics.abs(v.x),
       $Basics.abs(v.y));
    };
+   var lengthSquared = function (v) {
+      return v.x * v.x + v.y * v.y;
+   };
    var manhattanNorm = function (v) {
       return $Basics.abs(v.x) + $Basics.abs(v.y);
    };
@@ -115,6 +118,7 @@ Elm.Vector2.make = function (_elm) {
       v.x * n,
       v.y * n);
    });
+   var negate = scaleBy(-1);
    var normalize = function (v) {
       return A2(scaleBy,
       1 / length(v),
@@ -125,6 +129,7 @@ Elm.Vector2.make = function (_elm) {
                          ,origin: origin
                          ,xUnit: xUnit
                          ,yUnit: yUnit
+                         ,negate: negate
                          ,add: add
                          ,subtract: subtract
                          ,sub: sub
@@ -138,6 +143,7 @@ Elm.Vector2.make = function (_elm) {
                          ,manhattanNorm: manhattanNorm
                          ,taxicabNorm: taxicabNorm
                          ,length: length
+                         ,lengthSquared: lengthSquared
                          ,euclideanNorm: euclideanNorm
                          ,scaleBy: scaleBy
                          ,distance: distance

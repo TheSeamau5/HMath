@@ -1,0 +1,10 @@
+{
+    "summary": "Math Library in Elm",
+    "repository": "",
+    "dependencies": {},
+    "exposed-modules": [],
+    "version": "0.1.0",
+    "elm-version": "0.13",
+    "license": "BSD3",
+    "description": "This is a library in Elm that contains a number of useful types and functions for all kinds of uses."
+}

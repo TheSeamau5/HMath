@@ -1,11 +1,11 @@
 module Vector2 where
 {-| Represents a two dimensional vector.
 
-# Type and Constructors
+# Types and Constructors
 @docs Vector, origin, xUnit, yUnit
 
 # Mathematical Operations
-@docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance
+@docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance, maximumNorm, normalize, chebyshevDistance
 
 # Useful aliases and operators
 @docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot, taxicabNorm, taxicabDistance
@@ -176,3 +176,19 @@ manhattanDistance p q = manhattanNorm (p <-> q)
 {-| Finds the taxicab (or manhattan) distance between two vectors. -}
 taxicabDistance : Vector -> Vector -> number
 taxicabDistance = manhattanDistance
+
+{-| Finds the maximum norm of a vector.
+
+        maximumNorm (Vector -2 1) == 2
+-}
+maximumNorm : Vector -> number 
+maximumNorm v = max (abs v.x) (abs v.y)
+
+{-| Normalizes a vector. (i.e. scales the vector such that it has unit length)
+-}
+normalize : Vector -> Vector
+normalize v = scaleBy (1 / (length v)) v
+
+{-| Finds the Chebyshev distance between two vectors. -}
+chebyshevDistance : Vector -> Vector -> number
+chebyshevDistance p q = max (abs (q.x - p.x)) (abs (q.y - p.y))

@@ -11,10 +11,23 @@ Elm.Vector2.make = function (_elm) {
    _A = _N.Array.make(_elm),
    _E = _N.Error.make(_elm),
    $moduleName = "Vector2",
-   $Basics = Elm.Basics.make(_elm);
-   var mannhattanNorm = function (v) {
+   $Basics = Elm.Basics.make(_elm),
+   $Text = Elm.Text.make(_elm);
+   var chebyshevDistance = F2(function (p,
+   q) {
+      return A2($Basics.max,
+      $Basics.abs(q.x - p.x),
+      $Basics.abs(q.y - p.y));
+   });
+   var maximumNorm = function (v) {
+      return A2($Basics.max,
+      $Basics.abs(v.x),
+      $Basics.abs(v.y));
+   };
+   var manhattanNorm = function (v) {
       return $Basics.abs(v.x) + $Basics.abs(v.y);
    };
+   var taxicabNorm = manhattanNorm;
    var norm = F2(function (n,v) {
       return Math.pow(Math.pow(v.x,
       n) + Math.pow(v.y,n),
@@ -59,12 +72,13 @@ Elm.Vector2.make = function (_elm) {
       p,
       q));
    });
-   var mannhattanDistance = F2(function (p,
+   var manhattanDistance = F2(function (p,
    q) {
-      return mannhattanNorm(A2(_op["<->"],
+      return manhattanNorm(A2(_op["<->"],
       p,
       q));
    });
+   var taxicabDistance = manhattanDistance;
    _op["<*>"] = F2(function (p,q) {
       return A2(Vector,
       p.x * q.x,
@@ -90,6 +104,14 @@ Elm.Vector2.make = function (_elm) {
       v.x * n,
       v.y * n);
    });
+   var normalize = function (v) {
+      return A2(scaleBy,
+      1 / length(v),
+      v);
+   };
+   var main = $Text.asText(A2(chebyshevDistance,
+   A2(Vector,1,1),
+   A2(Vector,2,3)));
    _elm.Vector2.values = {_op: _op
                          ,Vector: Vector
                          ,origin: origin
@@ -105,10 +127,16 @@ Elm.Vector2.make = function (_elm) {
                          ,dotMultiply: dotMultiply
                          ,dot: dot
                          ,norm: norm
-                         ,mannhattanNorm: mannhattanNorm
+                         ,manhattanNorm: manhattanNorm
+                         ,taxicabNorm: taxicabNorm
                          ,length: length
                          ,scaleBy: scaleBy
                          ,distance: distance
-                         ,mannhattanDistance: mannhattanDistance};
+                         ,manhattanDistance: manhattanDistance
+                         ,taxicabDistance: taxicabDistance
+                         ,maximumNorm: maximumNorm
+                         ,normalize: normalize
+                         ,chebyshevDistance: chebyshevDistance
+                         ,main: main};
    return _elm.Vector2.values;
 };

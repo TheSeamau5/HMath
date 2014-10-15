@@ -11,8 +11,17 @@ Elm.Vector2.make = function (_elm) {
    _A = _N.Array.make(_elm),
    _E = _N.Error.make(_elm),
    $moduleName = "Vector2",
-   $Basics = Elm.Basics.make(_elm),
-   $Text = Elm.Text.make(_elm);
+   $Basics = Elm.Basics.make(_elm);
+   var canberraDistance = F2(function (p,
+   q) {
+      return function () {
+         var denY = $Basics.abs(p.y) + $Basics.abs(q.y);
+         var denX = $Basics.abs(p.x) + $Basics.abs(q.x);
+         var numY = $Basics.abs(p.y - q.y);
+         var numX = $Basics.abs(p.x - q.x);
+         return numX / denX + numY / denY;
+      }();
+   });
    var chebyshevDistance = F2(function (p,
    q) {
       return A2($Basics.max,
@@ -34,6 +43,7 @@ Elm.Vector2.make = function (_elm) {
       1 / n);
    });
    var length = norm(2);
+   var euclideanNorm = length;
    _op["<.>"] = F2(function (p,q) {
       return p.x * q.x + p.y * q.y;
    });
@@ -72,6 +82,7 @@ Elm.Vector2.make = function (_elm) {
       p,
       q));
    });
+   var euclideanDistance = distance;
    var manhattanDistance = F2(function (p,
    q) {
       return manhattanNorm(A2(_op["<->"],
@@ -109,9 +120,6 @@ Elm.Vector2.make = function (_elm) {
       1 / length(v),
       v);
    };
-   var main = $Text.asText(A2(chebyshevDistance,
-   A2(Vector,1,1),
-   A2(Vector,2,3)));
    _elm.Vector2.values = {_op: _op
                          ,Vector: Vector
                          ,origin: origin
@@ -130,13 +138,15 @@ Elm.Vector2.make = function (_elm) {
                          ,manhattanNorm: manhattanNorm
                          ,taxicabNorm: taxicabNorm
                          ,length: length
+                         ,euclideanNorm: euclideanNorm
                          ,scaleBy: scaleBy
                          ,distance: distance
+                         ,euclideanDistance: euclideanDistance
                          ,manhattanDistance: manhattanDistance
                          ,taxicabDistance: taxicabDistance
                          ,maximumNorm: maximumNorm
                          ,normalize: normalize
                          ,chebyshevDistance: chebyshevDistance
-                         ,main: main};
+                         ,canberraDistance: canberraDistance};
    return _elm.Vector2.values;
 };

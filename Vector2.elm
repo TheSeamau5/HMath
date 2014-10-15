@@ -5,10 +5,13 @@ module Vector2 where
 @docs Vector, origin, xUnit, yUnit
 
 # Mathematical Operations
-@docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance, maximumNorm, normalize, chebyshevDistance
+@docs add, subtract, multiply, divide, dotMultiply, scaleBy, normalize
+
+# Norms and Distances
+@docs length, distance, norm, manhattanNorm, manhattanDistance, maximumNorm, chebyshevDistance, canberraDistance
 
 # Useful aliases and operators
-@docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot, taxicabNorm, taxicabDistance
+@docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot, taxicabNorm, taxicabDistance, euclideanNorm, euclideanDistance
 -}
 
 {-| The Vector type for 2-d vector operations. Useful for 2d graphics and vector math -}
@@ -155,6 +158,11 @@ taxicabNorm = manhattanNorm
 length : Vector -> number
 length = norm 2
 
+
+{-| Find the euclidean norm of a vector. -}
+euclideanNorm : Vector -> number
+euclideanNorm = length 
+
 {-| Scalar multiplication. Scale a vector by some value
     
         scaleBy 3 (Vector 2 8) == Vector 6 24
@@ -168,6 +176,10 @@ scaleBy n v = Vector (v.x * n) (v.y * n)
 -}
 distance : Vector -> Vector -> number
 distance p q = length (p <-> q)
+
+{-| Finds the euclidean distance between two vectors. -}
+euclideanDistance : Vector -> Vector -> number
+euclideanDistance = distance
 
 {-| Finds the manhattan (or taxicab) distance between two vectors. -}
 manhattanDistance : Vector -> Vector -> number
@@ -192,3 +204,12 @@ normalize v = scaleBy (1 / (length v)) v
 {-| Finds the Chebyshev distance between two vectors. -}
 chebyshevDistance : Vector -> Vector -> number
 chebyshevDistance p q = max (abs (q.x - p.x)) (abs (q.y - p.y))
+
+{-| Finds the Canberra distance between two vectors. -}
+canberraDistance : Vector -> Vector -> number
+canberraDistance p q = 
+  let numX = abs (p.x - q.x)
+      numY = abs (p.y - q.y)
+      denX = (abs p.x) + (abs q.x)
+      denY = (abs p.y) + (abs q.y)
+  in (numX / denX) + (numY / denY)

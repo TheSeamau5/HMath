@@ -4,8 +4,11 @@ module Vector2 where
 # Types and Constructors
 @docs Vector, origin, xUnit, yUnit
 
+# Type Conversions
+@docs toFloatVector, toTuple, toList
+
 # Mathematical Operations
-@docs negate, add, subtract, multiply, divide, dotMultiply, scaleBy, normalize
+@docs negate, add, subtract, multiply, divide, dotMultiply, scaleBy, normalize, center
 
 # Norms and Distances
 @docs length, lengthSquared, distance, norm, manhattanNorm, manhattanDistance, maximumNorm, chebyshevDistance, canberraDistance
@@ -13,6 +16,8 @@ module Vector2 where
 # Useful aliases and operators
 @docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot, taxicabNorm, taxicabDistance, euclideanNorm, euclideanDistance
 -}
+
+-- TYPES AND CONSTRUCTORS
 
 {-| The Vector type for 2-d vector operations. Useful for 2d graphics and vector math -}
 type Vector = { x : Float, y : Float }
@@ -28,6 +33,22 @@ xUnit = Vector 1 0
 {-| Simple Constructor a x = 0, y = 1 -}
 yUnit : Vector
 yUnit = Vector 0 1
+
+-- Type Conversions
+
+{-| Convert an integer point or vector to a float Vector. -}
+toFloatVector : { a | x : Int, y : Int } -> Vector
+toFloatVector p = Vector (toFloat p.x) (toFloat p.y)
+
+{-| Convert a vector to a tuple. -}
+toTuple : Vector -> (Float, Float)
+toTuple v = (v.x, v.y)
+
+{-| Convert a vector to a list. -}
+toList : Vector -> [Float]
+toList v = [v.x, v.y]
+
+-- MATHEMATICAL OPERATIONS
 
 {-| Negates a vector.
         
@@ -138,6 +159,26 @@ dotMultiply = (<.>)
 dot : Vector -> Vector -> Float
 dot = dotMultiply
 
+-- USEFUL FUNCTIONS
+
+{-| Scalar multiplication. Scale a vector by some value
+    
+        scaleBy 3 (Vector 2 8) == Vector 6 24
+-}
+scaleBy : number -> Vector -> Vector 
+scaleBy n v = Vector (v.x * n) (v.y * n)
+
+
+{-| Normalizes a vector. (i.e. scales the vector such that it has unit length)
+-}
+normalize : Vector -> Vector
+normalize v = scaleBy (1 / (length v)) v
+
+{-| Find the center of two points (vectors). -}
+center : Vector -> Vector -> Vector
+center p q = scaleBy 0.5 (p <+> q)
+
+-- NORMS AND DISTANCES
 
 {-| Find the nth norm of a vector. This is a generalized form of length or distance.
     Note that typical pythagorean length or euclidean distance is just "norm 2".
@@ -165,7 +206,10 @@ length : Vector -> number
 length = norm 2
 
 {-| Find the length squared of a vector. 
-    This is usually a convenience function but nevertheless very useful. -}
+
+    This is usually a convenience function but nevertheless very useful. 
+
+-}
 lengthSquared : Vector -> number
 lengthSquared v = (v.x * v.x) + (v.y * v.y)
 
@@ -174,12 +218,6 @@ lengthSquared v = (v.x * v.x) + (v.y * v.y)
 euclideanNorm : Vector -> number
 euclideanNorm = length 
 
-{-| Scalar multiplication. Scale a vector by some value
-    
-        scaleBy 3 (Vector 2 8) == Vector 6 24
--}
-scaleBy : number -> Vector -> Vector 
-scaleBy n v = Vector (v.x * n) (v.y * n)
 
 {-| Finds the euclidean distance between two vectors. 
     This is the most typical measure of distance between two vectors.
@@ -207,10 +245,6 @@ taxicabDistance = manhattanDistance
 maximumNorm : Vector -> number 
 maximumNorm v = max (abs v.x) (abs v.y)
 
-{-| Normalizes a vector. (i.e. scales the vector such that it has unit length)
--}
-normalize : Vector -> Vector
-normalize v = scaleBy (1 / (length v)) v
 
 {-| Finds the Chebyshev distance between two vectors. -}
 chebyshevDistance : Vector -> Vector -> number

@@ -55,12 +55,26 @@ Elm.Vector2.make = function (_elm) {
       return A2(_op["<.>"],x,y);
    });
    var dot = dotMultiply;
+   var toList = function (v) {
+      return _L.fromArray([v.x
+                          ,v.y]);
+   };
+   var toTuple = function (v) {
+      return {ctor: "_Tuple2"
+             ,_0: v.x
+             ,_1: v.y};
+   };
    var Vector = F2(function (a,b) {
       return {_: {},x: a,y: b};
    });
    var origin = A2(Vector,0,0);
    var xUnit = A2(Vector,1,0);
    var yUnit = A2(Vector,0,1);
+   var toFloatVector = function (p) {
+      return A2(Vector,
+      $Basics.toFloat(p.x),
+      $Basics.toFloat(p.y));
+   };
    _op["<+>"] = F2(function (p,q) {
       return A2(Vector,
       p.x + q.x,
@@ -124,11 +138,19 @@ Elm.Vector2.make = function (_elm) {
       1 / length(v),
       v);
    };
+   var center = F2(function (p,q) {
+      return A2(scaleBy,
+      0.5,
+      A2(_op["<+>"],p,q));
+   });
    _elm.Vector2.values = {_op: _op
                          ,Vector: Vector
                          ,origin: origin
                          ,xUnit: xUnit
                          ,yUnit: yUnit
+                         ,toFloatVector: toFloatVector
+                         ,toTuple: toTuple
+                         ,toList: toList
                          ,negate: negate
                          ,add: add
                          ,subtract: subtract
@@ -139,19 +161,20 @@ Elm.Vector2.make = function (_elm) {
                          ,div: div
                          ,dotMultiply: dotMultiply
                          ,dot: dot
+                         ,scaleBy: scaleBy
+                         ,normalize: normalize
+                         ,center: center
                          ,norm: norm
                          ,manhattanNorm: manhattanNorm
                          ,taxicabNorm: taxicabNorm
                          ,length: length
                          ,lengthSquared: lengthSquared
                          ,euclideanNorm: euclideanNorm
-                         ,scaleBy: scaleBy
                          ,distance: distance
                          ,euclideanDistance: euclideanDistance
                          ,manhattanDistance: manhattanDistance
                          ,taxicabDistance: taxicabDistance
                          ,maximumNorm: maximumNorm
-                         ,normalize: normalize
                          ,chebyshevDistance: chebyshevDistance
                          ,canberraDistance: canberraDistance};
    return _elm.Vector2.values;

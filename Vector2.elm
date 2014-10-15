@@ -5,7 +5,7 @@ module Vector2 where
     @docs Vector, origin, xUnit, yUnit
 
     #Mathematical Operations
-    @docs add, subtract, multiply, divide, dotMultiply, norm, mannhattanNorm, length, scaleBy, distance, manhattanDistance
+    @docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance
 
     #Useful aliases and operators
     @docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot
@@ -14,13 +14,16 @@ module Vector2 where
 {-| The Vector type for 2-d vector operations. Useful for 2d graphics and vector math -}
 type Vector = { x : Float, y : Float }
 
-{-| Default constructor at x : 0, y : 0 -}
+{-| Default constructor at x = 0, y = 0 -}
+origin : Vector
 origin = Vector 0 0
 
-{-| Simple constructor at x : 1, y : 0 -}
+{-| Simple constructor at x = 1, y = 0 -}
+xUnit : Vector
 xUnit = Vector 1 0
 
-{-| Simple Constructor a x : 0, y : 1 -}
+{-| Simple Constructor a x = 0, y = 1 -}
+yUnit : Vector
 yUnit = Vector 0 1
 
 
@@ -136,8 +139,8 @@ norm : number -> Vector -> number
 norm n v = ((v.x ^ n) + (v.y ^ n)) ^ (1 / n)
 
 {-| Find the manhattan (or taxicab) norm of a vector. -}
-mannhattanNorm : Vector -> number
-mannhattanNorm v = (abs v.x) + (abs v.y)
+manhattanNorm : Vector -> number
+manhattanNorm v = (abs v.x) + (abs v.y)
 
 {-| Find the euclidean length of a vector. 
     This is the most typical measure for the length of a vector. 
@@ -164,6 +167,5 @@ distance p q = length (p <-> q)
 
 {-| Finds the manhattan (or taxicab) distance between two vectors.
 -}
-mannhattanDistance : Vector -> Vector -> number
-mannhattanDistance p q = mannhattanNorm (p <-> q)
-
+manhattanDistance : Vector -> Vector -> number
+manhattanDistance p q = manhattanNorm (p <-> q)

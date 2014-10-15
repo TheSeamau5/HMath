@@ -1,0 +1,562 @@
+[
+{
+  "name": "Vector2",
+  "document": "Represents a two dimensional vector.\n\n    #Type and Constructors\n    @docs Vector, origin, xUnit, yUnit\n\n    #Mathematical Operations\n    @docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance\n\n    #Useful aliases and operators\n    @docs (\u003c+\u003e), (\u003c-\u003e), (\u003c*\u003e), (\u003c/\u003e), (\u003c.\u003e), sub, mul, div, dot",
+  "aliases": [
+    {
+      "name": "Vector",
+      "comment": "The Vector type for 2-d vector operations. Useful for 2d graphics and vector math",
+      "raw": "type Vector = { x : Float, y : Float }",
+      "typeVariables": [],
+      "type": {
+        "tag": "record",
+        "extension": null,
+        "fields": [
+          [
+            "x",
+            {
+              "tag": "adt",
+              "name": "Float",
+              "args": []
+            }
+          ],
+          [
+            "y",
+            {
+              "tag": "adt",
+              "name": "Float",
+              "args": []
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "datatypes": [],
+  "values": [
+    {
+      "name": "\u003c*\u003e",
+      "comment": "Vector multiplication. Element by element multiplication.\n    For dot product see \"\u003c.\u003e\".\n\n    (Vector 3 4) \u003c*\u003e (Vector 2 2) == Vector 6 8",
+      "raw": "(\u003c*\u003e) : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      },
+      "associativity": "left",
+      "precedence": 9
+    },
+    {
+      "name": "\u003c+\u003e",
+      "comment": "Vector addition.\n\n    (Vector 2 1) \u003c+\u003e (Vector 4 4) == Vector 6 5",
+      "raw": "(\u003c+\u003e) : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      },
+      "associativity": "left",
+      "precedence": 9
+    },
+    {
+      "name": "\u003c-\u003e",
+      "comment": "Vector subtraction\n\n    (Vector 3 4) \u003c-\u003e (Vector 2 2) == Vector 1 2",
+      "raw": "(\u003c-\u003e) : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      },
+      "associativity": "left",
+      "precedence": 9
+    },
+    {
+      "name": "\u003c.\u003e",
+      "comment": "Dot product. \n    \n    (Vector 3 4) \u003c.\u003e (Vector 2 2) == 14",
+      "raw": "(\u003c.\u003e) : Vector -\u003e Vector -\u003e Float",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Float",
+          "args": []
+        }
+      },
+      "associativity": "left",
+      "precedence": 9
+    },
+    {
+      "name": "\u003c/\u003e",
+      "comment": "Vector division. Element by element division. \n    \n    (Vector 6 4) \u003c/\u003e (Vector 2 2) == Vector 3 2",
+      "raw": "(\u003c/\u003e) : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      },
+      "associativity": "left",
+      "precedence": 9
+    },
+    {
+      "name": "add",
+      "comment": "Vector addition\n\n    add (Vector 2 1) (Vector 4 4) == Vector 6 5",
+      "raw": "add : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "distance",
+      "comment": "Finds the euclidean distance between two vectors. \n    This is the most typical measure of distance between two vectors.\n    Use this if unsure",
+      "raw": "distance : Vector -\u003e Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
+      "name": "div",
+      "comment": "Vector division. Element by element division. \n    \n    div (Vector 6 4) (Vector 2 2) == Vector 3 2",
+      "raw": "div : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "divide",
+      "comment": "Vector division. Element by element division. \n    \n    divide (Vector 6 4) (Vector 2 2) == Vector 3 2",
+      "raw": "divide : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "dot",
+      "comment": "Dot product. \n    \n    dot (Vector 3 4) (Vector 2 2) == 14",
+      "raw": "dot : Vector -\u003e Vector -\u003e Float",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Float",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "dotMultiply",
+      "comment": "Dot product. \n    \n    dotMultiply (Vector 3 4) (Vector 2 2) == 14",
+      "raw": "dotMultiply : Vector -\u003e Vector -\u003e Float",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Float",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "length",
+      "comment": "Find the euclidean length of a vector. \n    This is the most typical measure for the length of a vector. \n    Use this if unsure. \n\n    length (Vector 5 12) == 13",
+      "raw": "length : Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
+      "name": "manhattanDistance",
+      "comment": "Finds the manhattan (or taxicab) distance between two vectors.",
+      "raw": "manhattanDistance : Vector -\u003e Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
+      "name": "manhattanNorm",
+      "comment": "Find the manhattan (or taxicab) norm of a vector.",
+      "raw": "manhattanNorm : Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
+      "name": "mul",
+      "comment": "Vector multiplication. Element by element multiplication.\n    For dot product see \"dot\".\n\n    mul (Vector 3 4) (Vector 2 2) == Vector 6 8",
+      "raw": "mul : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "multiply",
+      "comment": "Vector multiplication. Element by element multiplication.\n    For dot product see \"dotMultiply\".\n\n    multiply (Vector 3 4) (Vector 2 2) == Vector 6 8",
+      "raw": "multiply : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "norm",
+      "comment": "Find the nth norm of a vector. This is a generalized form of length or distance.\n    Note that typical pythagorean length or euclidean distance is just \"norm 2\".\n\n    norm 2 (Vector 5 12) == 13",
+      "raw": "norm : number -\u003e Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "var",
+            "name": "number"
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
+      "name": "origin",
+      "comment": "Default constructor at x = 0, y = 0",
+      "raw": "origin : Vector",
+      "type": {
+        "tag": "adt",
+        "name": "Vector",
+        "args": []
+      }
+    },
+    {
+      "name": "scaleBy",
+      "comment": "Scalar multiplication. Scale a vector by some value\n    \n    scaleBy 3 (Vector 2 8) == Vector 6 24",
+      "raw": "scaleBy : number -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "var",
+            "name": "number"
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "sub",
+      "comment": "Vector subtraction\n\n    sub (Vector 3 4) (Vector 2 2) == Vector 1 2",
+      "raw": "sub : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "subtract",
+      "comment": "Vector subtraction\n\n    subtract (Vector 3 4) (Vector 2 2) == Vector 1 2",
+      "raw": "subtract : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "xUnit",
+      "comment": "Simple constructor at x = 1, y = 0",
+      "raw": "xUnit : Vector",
+      "type": {
+        "tag": "adt",
+        "name": "Vector",
+        "args": []
+      }
+    },
+    {
+      "name": "yUnit",
+      "comment": "Simple Constructor a x = 0, y = 1",
+      "raw": "yUnit : Vector",
+      "type": {
+        "tag": "adt",
+        "name": "Vector",
+        "args": []
+      }
+    }
+  ]
+}
+]

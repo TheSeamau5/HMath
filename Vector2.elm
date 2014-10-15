@@ -1,13 +1,13 @@
 module Vector2 where
 {-| Represents a two dimensional vector.
 
-    #Type and Constructors
+    # Type and Constructors
     @docs Vector, origin, xUnit, yUnit
 
-    #Mathematical Operations
+    # Mathematical Operations
     @docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance
 
-    #Useful aliases and operators
+    # Useful aliases and operators
     @docs (<+>), (<->), (<*>), (</>), (<.>), sub, mul, div, dot
 -}
 

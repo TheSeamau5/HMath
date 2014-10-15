@@ -1,6 +1,6 @@
 {
   "name": "Vector2",
-  "document": "Represents a two dimensional vector.\n\n    #Type and Constructors\n    @docs Vector, origin, xUnit, yUnit\n\n    #Mathematical Operations\n    @docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance\n\n    #Useful aliases and operators\n    @docs (\u003c+\u003e), (\u003c-\u003e), (\u003c*\u003e), (\u003c/\u003e), (\u003c.\u003e), sub, mul, div, dot",
+  "document": "Represents a two dimensional vector.\n\n    # Type and Constructors\n    @docs Vector, origin, xUnit, yUnit\n\n    # Mathematical Operations\n    @docs add, subtract, multiply, divide, dotMultiply, norm, manhattanNorm, length, scaleBy, distance, manhattanDistance\n\n    # Useful aliases and operators\n    @docs (\u003c+\u003e), (\u003c-\u003e), (\u003c*\u003e), (\u003c/\u003e), (\u003c.\u003e), sub, mul, div, dot",
   "aliases": [
     {
       "name": "Vector",

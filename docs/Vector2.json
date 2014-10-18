@@ -1,6 +1,6 @@
 {
   "name": "Vector2",
-  "document": "Represents a two dimensional vector.\n\n# Types and Constructors\n@docs Vector, origin, xUnit, yUnit\n\n# Mathematical Operations\n@docs add, subtract, multiply, divide, dotMultiply, scaleBy, normalize\n\n# Norms and Distances\n@docs length, distance, norm, manhattanNorm, manhattanDistance, maximumNorm, chebyshevDistance, canberraDistance\n\n# Useful aliases and operators\n@docs (\u003c+\u003e), (\u003c-\u003e), (\u003c*\u003e), (\u003c/\u003e), (\u003c.\u003e), sub, mul, div, dot, taxicabNorm, taxicabDistance, euclideanNorm, euclideanDistance",
+  "document": "Represents a two dimensional vector.\n\n# Types and Constructors\n@docs Vector, origin, xUnit, yUnit\n\n# Type Conversions\n@docs toFloatVector, toTuple, toList\n\n# Mathematical Operations\n@docs negate, add, subtract, multiply, divide, dotMultiply, scaleBy, normalize, center\n\n# Norms and Distances\n@docs length, lengthSquared, distance, norm, manhattanNorm, manhattanDistance, maximumNorm, chebyshevDistance, canberraDistance\n\n# Useful aliases and operators\n@docs (\u003c+\u003e), (\u003c-\u003e), (\u003c*\u003e), (\u003c/\u003e), (\u003c.\u003e), sub, mul, div, dot, taxicabNorm, taxicabDistance, euclideanNorm, euclideanDistance",
   "aliases": [
     {
       "name": "Vector",
@@ -218,6 +218,31 @@
       }
     },
     {
+      "name": "center",
+      "comment": "Find the center of two points (vectors).",
+      "raw": "center : Vector -\u003e Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
       "name": "chebyshevDistance",
       "comment": "Finds the Chebyshev distance between two vectors.",
       "raw": "chebyshevDistance : Vector -\u003e Vector -\u003e number",
@@ -428,6 +453,25 @@
       }
     },
     {
+      "name": "lengthSquared",
+      "comment": "Find the length squared of a vector. \n\n    This is usually a convenience function but nevertheless very useful.",
+      "raw": "lengthSquared : Vector -\u003e number",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "var",
+          "name": "number"
+        }
+      }
+    },
+    {
       "name": "manhattanDistance",
       "comment": "Finds the manhattan (or taxicab) distance between two vectors.",
       "raw": "manhattanDistance : Vector -\u003e Vector -\u003e number",
@@ -526,6 +570,26 @@
             "name": "Vector",
             "args": []
           },
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "negate",
+      "comment": "Negates a vector.\n        \n        negate (Vector 3 4) == Vector -3 -4",
+      "raw": "negate : Vector -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
           {
             "tag": "adt",
             "name": "Vector",
@@ -706,6 +770,103 @@
         "result": {
           "tag": "var",
           "name": "number"
+        }
+      }
+    },
+    {
+      "name": "toFloatVector",
+      "comment": "Convert an integer point or vector to a float Vector.",
+      "raw": "toFloatVector : { a | x : Int, y : Int } -\u003e Vector",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "record",
+            "extension": {
+              "tag": "var",
+              "name": "a"
+            },
+            "fields": [
+              [
+                "x",
+                {
+                  "tag": "adt",
+                  "name": "Int",
+                  "args": []
+                }
+              ],
+              [
+                "y",
+                {
+                  "tag": "adt",
+                  "name": "Int",
+                  "args": []
+                }
+              ]
+            ]
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "Vector",
+          "args": []
+        }
+      }
+    },
+    {
+      "name": "toList",
+      "comment": "Convert a vector to a list.",
+      "raw": "toList : Vector -\u003e [Float]",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "_List",
+          "args": [
+            {
+              "tag": "adt",
+              "name": "Float",
+              "args": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "toTuple",
+      "comment": "Convert a vector to a tuple.",
+      "raw": "toTuple : Vector -\u003e (Float, Float)",
+      "type": {
+        "tag": "function",
+        "args": [
+          {
+            "tag": "adt",
+            "name": "Vector",
+            "args": []
+          }
+        ],
+        "result": {
+          "tag": "adt",
+          "name": "_Tuple2",
+          "args": [
+            {
+              "tag": "adt",
+              "name": "Float",
+              "args": []
+            },
+            {
+              "tag": "adt",
+              "name": "Float",
+              "args": []
+            }
+          ]
         }
       }
     },
